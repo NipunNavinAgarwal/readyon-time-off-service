@@ -1,0 +1,110 @@
+# ReadyOn Time-Off Microservice
+
+NestJS + SQLite implementation of the ReadyOn time-off take-home exercise.
+
+The service manages employee time-off requests, keeps local balance projections aligned with HCM, preserves pending reservations, and includes a mutable mock HCM for regression-heavy tests.
+
+## Architecture
+
+- NestJS REST API
+- SQLite persistence through Prisma
+- Local balance projection per employee/location
+- Pending reservation model to prevent double-spend
+- Realtime HCM checks on request creation and approval
+- Batch HCM sync that preserves local reservations
+- Mock HCM endpoints for external balance changes and failure scenarios
+
+See the full technical requirement document: [docs/TRD.md](docs/TRD.md).
+
+## Setup
+
+```bash
+npm install
+cp .env.example .env
+npm run prisma:generate
+npm run db:setup
+npm run start:dev
+```
+
+`npm run db:setup` applies the committed SQLite migration directly. Prisma's schema engine can be environment-sensitive on some local machines, while the application itself still uses Prisma Client for all database access.
+
+The service listens on `http://localhost:3000` by default.
+
+## API Examples
+
+Seed mock HCM:
+
+```bash
+curl -X POST http://localhost:3000/mock-hcm/balances \
+  -H 'Content-Type: application/json' \
+  -d '{"balances":[{"employeeId":"emp-1","locationId":"loc-1","balanceDays":10}]}'
+```
+
+Create a request:
+
+```bash
+curl -X POST http://localhost:3000/time-off-requests \
+  -H 'Content-Type: application/json' \
+  -d '{"employeeId":"emp-1","locationId":"loc-1","days":2}'
+```
+
+Read balance:
+
+```bash
+curl 'http://localhost:3000/balances/emp-1?locationId=loc-1'
+```
+
+Approve a request:
+
+```bash
+curl -X POST http://localhost:3000/time-off-requests/{id}/approve
+```
+
+Batch sync external HCM changes:
+
+```bash
+curl -X POST http://localhost:3000/sync/hcm-batch \
+  -H 'Content-Type: application/json' \
+  -d '{"balances":[{"employeeId":"emp-1","locationId":"loc-1","balanceDays":15}]}'
+```
+
+## Tests And Coverage
+
+```bash
+npm test
+npm run test:e2e
+npm run test:cov
+```
+
+Coverage target:
+
+- Statements: 96.24%
+- Branches: 100%
+- Functions: 92.85%
+- Lines: 95.96%
+
+Latest local coverage proof from `npm run test:cov`:
+
+```text
+Test Suites: 6 passed, 6 total
+Tests:       21 passed, 21 total
+Statements:  96.24%
+Branches:   100%
+Functions:   92.85%
+Lines:       95.96%
+```
+
+## GitHub Delivery
+
+This repo is intended to be pushed as a public reviewer-accessible repository named:
+
+```text
+readyon-time-off-service
+```
+
+Because GitHub CLI may not be installed, create the public GitHub repo in the browser, then run:
+
+```bash
+git remote add origin git@github.com:<your-username>/readyon-time-off-service.git
+git push -u origin main
+```
