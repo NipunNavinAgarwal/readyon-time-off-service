@@ -18,7 +18,6 @@ Reviewer docs:
 
 - Technical requirement document: [docs/TRD.md](docs/TRD.md)
 - Test cases and coverage proof: [docs/TEST_CASES_AND_COVERAGE.md](docs/TEST_CASES_AND_COVERAGE.md)
-- Submission guide: [docs/SUBMISSION.md](docs/SUBMISSION.md)
 
 ## Setup
 
@@ -102,19 +101,4 @@ Statements:  97.77%
 Branches:   100%
 Functions:   96.49%
 Lines:       97.61%
-```
-
-## GitHub Delivery
-
-This repo is intended to be pushed as a public reviewer-accessible repository named:
-
-```text
-readyon-time-off-service
-```
-
-Because GitHub CLI may not be installed, create the public GitHub repo in the browser, then run:
-
-```bash
-git remote add origin git@github.com:<your-username>/readyon-time-off-service.git
-git push -u origin main
 ```
