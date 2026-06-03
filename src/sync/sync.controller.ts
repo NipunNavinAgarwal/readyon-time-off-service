@@ -35,4 +35,13 @@ export class SyncController {
       throw toHttpError(error);
     }
   }
+
+  @Post('hcm-batch/pull')
+  async pullBatchFromHcm() {
+    try {
+      return await this.sync.syncFromHcmBatch();
+    } catch (error) {
+      throw toHttpError(error);
+    }
+  }
 }

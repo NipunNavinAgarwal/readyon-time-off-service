@@ -228,4 +228,22 @@ describe('TimeOffRequests integration', () => {
 
     await app.close();
   });
+
+  it('pulls a batch sync from mock HCM when no payload is supplied', async () => {
+    const { app, hcm } = await createTestApp();
+    hcm.seed([{ employeeId: 'emp-1', locationId: 'loc-1', balanceDays: 7 }]);
+
+    await request(app.getHttpServer()).post('/sync/hcm-batch/pull').send({}).expect(201).expect({ synced: 1 });
+
+    await request(app.getHttpServer())
+      .get('/balances/emp-1?locationId=loc-1')
+      .expect(200)
+      .expect(({ body }) => {
+        expect(body.hcmBalanceDays).toBe(7);
+        expect(body.reservedDays).toBe(0);
+        expect(body.availableDays).toBe(7);
+      });
+
+    await app.close();
+  });
 });

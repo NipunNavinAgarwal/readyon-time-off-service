@@ -55,6 +55,7 @@ export class BalancesService {
       create: { employeeId, locationId, hcmBalanceDays, reservedDays: 0, lastSyncedAt: new Date() },
       update: { hcmBalanceDays, lastSyncedAt: new Date() },
     });
+    // Batch/realtime HCM sync events are not tied to a ReadyOn request.
     await tx.balanceEvent.create({
       data: {
         employeeId,

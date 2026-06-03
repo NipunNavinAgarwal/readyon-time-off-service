@@ -121,6 +121,16 @@ Behavior:
 - Preserves pending ReadyOn reservations.
 - Recomputes availability from the updated projection.
 
+This endpoint models a customer/HCM pushing the batch corpus into ReadyOn.
+
+### `POST /sync/hcm-batch/pull`
+
+Behavior:
+
+- Pulls the current batch corpus from the configured HCM client.
+- Applies the same reconciliation behavior as the pushed batch endpoint.
+- Exists to exercise and document the pull-based integration path for HCMs where ReadyOn initiates sync.
+
 ### Mock HCM
 
 - `POST /mock-hcm/reset`
@@ -197,6 +207,7 @@ Reject:
 Failed:
 
 - Used when HCM returns a response that ReadyOn cannot safely accept.
+- A future retry endpoint or operations runbook would handle manual reconciliation for failed requests.
 
 ## HCM Realtime And Batch Sync Strategy
 
@@ -319,6 +330,7 @@ Covered scenarios:
 - HCM debit failures.
 - Unsafe HCM success responses.
 - Batch sync preserving pending reservations.
+- Pull-based HCM batch sync.
 - Concurrent requests preventing overdraw.
 - Local pending reservations rejecting otherwise HCM-valid requests.
 - Partial-day request reservation and approval.
@@ -338,8 +350,8 @@ The target is at least 85% global statements, branches, functions, and lines.
 Latest local proof:
 
 - Test suites: 6 passed
-- Tests: 25 passed
-- Statements: 97.36%
+- Tests: 26 passed
+- Statements: 97.77%
 - Branches: 100%
-- Functions: 94.64%
-- Lines: 97.17%
+- Functions: 96.49%
+- Lines: 97.61%

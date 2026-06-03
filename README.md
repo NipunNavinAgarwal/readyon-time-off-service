@@ -68,6 +68,12 @@ curl -X POST http://localhost:3000/sync/hcm-batch \
   -d '{"balances":[{"employeeId":"emp-1","locationId":"loc-1","balanceDays":15}]}'
 ```
 
+Pull batch sync from the configured mock HCM:
+
+```bash
+curl -X POST http://localhost:3000/sync/hcm-batch/pull
+```
+
 ## Tests And Coverage
 
 ```bash
@@ -78,20 +84,20 @@ npm run test:cov
 
 Coverage target:
 
-- Statements: 97.36%
+- Statements: 97.77%
 - Branches: 100%
-- Functions: 94.64%
-- Lines: 97.17%
+- Functions: 96.49%
+- Lines: 97.61%
 
 Latest local coverage proof from `npm run test:cov`:
 
 ```text
 Test Suites: 6 passed, 6 total
-Tests:       25 passed, 25 total
-Statements:  97.36%
+Tests:       26 passed, 26 total
+Statements:  97.77%
 Branches:   100%
-Functions:   94.64%
-Lines:       97.17%
+Functions:   96.49%
+Lines:       97.61%
 ```
 
 ## GitHub Delivery
