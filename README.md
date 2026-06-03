@@ -14,7 +14,11 @@ The service manages employee time-off requests, keeps local balance projections 
 - Batch HCM sync that preserves local reservations
 - Mock HCM endpoints for external balance changes and failure scenarios
 
-See the full technical requirement document: [docs/TRD.md](docs/TRD.md).
+Reviewer docs:
+
+- Technical requirement document: [docs/TRD.md](docs/TRD.md)
+- Test cases and coverage proof: [docs/TEST_CASES_AND_COVERAGE.md](docs/TEST_CASES_AND_COVERAGE.md)
+- Submission guide: [docs/SUBMISSION.md](docs/SUBMISSION.md)
 
 ## Setup
 
