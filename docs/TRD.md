@@ -320,7 +320,11 @@ Covered scenarios:
 - Unsafe HCM success responses.
 - Batch sync preserving pending reservations.
 - Concurrent requests preventing overdraw.
+- Local pending reservations rejecting otherwise HCM-valid requests.
+- Partial-day request reservation and approval.
 - Repeated approval calls not double-debiting HCM.
+- Request payload validation.
+- Mock HCM reset behavior.
 - Mock HCM endpoints supporting mutable state.
 
 Coverage is generated with:
@@ -334,8 +338,8 @@ The target is at least 85% global statements, branches, functions, and lines.
 Latest local proof:
 
 - Test suites: 6 passed
-- Tests: 21 passed
-- Statements: 96.24%
+- Tests: 25 passed
+- Statements: 97.36%
 - Branches: 100%
-- Functions: 92.85%
-- Lines: 95.96%
+- Functions: 94.64%
+- Lines: 97.17%

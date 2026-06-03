@@ -78,20 +78,20 @@ npm run test:cov
 
 Coverage target:
 
-- Statements: 96.24%
+- Statements: 97.36%
 - Branches: 100%
-- Functions: 92.85%
-- Lines: 95.96%
+- Functions: 94.64%
+- Lines: 97.17%
 
 Latest local coverage proof from `npm run test:cov`:
 
 ```text
 Test Suites: 6 passed, 6 total
-Tests:       21 passed, 21 total
-Statements:  96.24%
+Tests:       25 passed, 25 total
+Statements:  97.36%
 Branches:   100%
-Functions:   92.85%
-Lines:       95.96%
+Functions:   94.64%
+Lines:       97.17%
 ```
 
 ## GitHub Delivery
